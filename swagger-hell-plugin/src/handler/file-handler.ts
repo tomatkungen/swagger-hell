@@ -3,7 +3,7 @@ import path from "path";
 
 // Create folder if it does not exist
 export const isFolderNotExistCreate = (rootFolder: string): string => {
-    const folderPath = path.resolve(__dirname, '..', rootFolder);
+    const folderPath = path.resolve(__dirname, '..', '..', rootFolder);
 
     // If folder does not exist, create it
     if (!fs.existsSync(folderPath)) {

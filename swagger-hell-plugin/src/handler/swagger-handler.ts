@@ -3,7 +3,6 @@ import { getJSONFileNameFromUrl } from "../util.ts/get-json-filename-url";
 import { getFileJson, isFileExist, isFolderNotExistCreate, renameFile, saveFile } from "./file-handler";
 import { fetchJson } from "../util.ts/fetch-json";
 import { validateOpaJson } from "../util.ts/validate-opa-json";
-import { get } from "http";
 
 export const fileSwagger = async (url: string): Promise<OpenAPI3 | null> => {
 
@@ -18,11 +17,11 @@ export const fileSwagger = async (url: string): Promise<OpenAPI3 | null> => {
 }
 
 export const fetchSwagger = async (url: string): Promise<OpenAPI3 | null> => {
-    
+
     // Fetch Swagger JSON from URL
     const openAPI3 = await fetchJson<OpenAPI3>(url)
 
-    if (!openAPI3 || !validateOpaJson(openAPI3, "3")) 
+    if (!openAPI3 || !validateOpaJson(openAPI3, "3"))
         return null;
 
     const filename = getJSONFileNameFromUrl(url);
@@ -32,7 +31,7 @@ export const fetchSwagger = async (url: string): Promise<OpenAPI3 | null> => {
 
     // If file exists, rename it to filename_prev.json
     if (isFileExist(swaggerFolder, filename)) {
-        renameFile(swaggerFolder, filename, `${filename}_prev.json`);
+        renameFile(swaggerFolder, filename, `${filename.replace(".json", "_prev.json")}`);
     }
 
     // Save the fetched Swagger JSON to file

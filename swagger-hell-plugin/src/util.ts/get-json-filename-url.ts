@@ -7,6 +7,6 @@ export const getJSONFileNameFromUrl = (url: string): string => {
     const fileName = `${hostName !== "" ? `${hostName}-` : ''}${pathname || 'root'}`;
 
     return fileName.endsWith('.json') ?
-        fileName :
-        `${fileName}.json`;
+        fileName.toLowerCase() :
+        `${fileName}.json`.toLowerCase();
 }
