@@ -2,6 +2,7 @@
     "name": "swagger-hell-plugin",
     "scripts": {
         "dev": "tsx src/main.ts",
+        "test": "tsx src/test.ts",
         "type:check": "tsc --noEmit"
     },
     "dependencies": {
