@@ -37,6 +37,10 @@ export const getFile = (folderPath: string, filename: string): string | null => 
     return null;
 }
 
+export const getFilesInFolder = (folderPath: string): string[] => {
+    return fs.readdirSync(folderPath) || [];
+}
+
 export const isFileExist = (folderPath: string, filename: string): boolean => {
     return fs.existsSync(path.join(folderPath, filename));
 }
@@ -48,3 +52,4 @@ export const saveFile = (folderPath: string, filename: string, content: string):
 export const renameFile = (folderPath: string, oldFilename: string, newFilename: string): void => {
     fs.renameSync(path.join(folderPath, oldFilename), path.join(folderPath, newFilename));
 }
+
