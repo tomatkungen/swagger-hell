@@ -1,7 +1,7 @@
 import { type OpenAPI3 } from "openapi-typescript";
 import { endpointsSwagger, fetchSwagger, filenamesSwagger, filenameSwagger, infoSwagger, urlSwagger } from "../handler/swagger-handler";
 
-type Nullable<T> = T| null
+export type Nullable<T> = T| null
 
 export type SwaggerFileNames = {
     current: string[];
