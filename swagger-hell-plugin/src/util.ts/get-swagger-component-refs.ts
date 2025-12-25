@@ -13,7 +13,6 @@ export const getSwaggerComponentRefs = (swaggerFile: OpenAPI3, pathRef: string, 
         if (key === '$ref' && typeof value === 'string') {
             refs.add(value);
             getSwaggerComponentRefs(swaggerFile, value, refs, index + 1);
-            // Add logic here to collect nested refs if needed
         }
     })
 }
