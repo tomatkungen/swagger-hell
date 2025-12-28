@@ -176,10 +176,10 @@
     pluralize "^8.0.0"
     yaml-ast-parser "0.0.43"
 
-"@types/node@^25.0.1":
-  version "25.0.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.1.tgz#9c41c277a1b16491174497cd075f8de7c27a1ac4"
-  integrity sha512-czWPzKIAXucn9PtsttxmumiQ9N0ok9FrBwgRWrwmVLlp86BrMExzvXRLFYRJ+Ex3g6yqj+KuaxfX1JTgV2lpfg==
+"@types/node@^25.0.3":
+  version "25.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-25.0.3.tgz#79b9ac8318f373fbfaaf6e2784893efa9701f269"
+  integrity sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==
   dependencies:
     undici-types "~7.16.0"
 
@@ -280,6 +280,11 @@ get-tsconfig@^4.7.5:
   integrity sha512-1VKTZJCwBrvbd+Wn3AOgQP/2Av+TfTCOlE4AcRJE72W1ksZXbAx8PPBR9RzgTeSPzlPMHrbANMH3LbltH73wxQ==
   dependencies:
     resolve-pkg-maps "^1.0.0"
+
+graphql@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.12.0.tgz#28cc2462435b1ac3fdc6976d030cef83a0c13ac7"
+  integrity sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ==
 
 https-proxy-agent@^7.0.5:
   version "7.0.6"
