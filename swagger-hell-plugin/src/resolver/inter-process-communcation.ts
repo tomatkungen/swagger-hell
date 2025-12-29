@@ -1,6 +1,8 @@
 import { graphql } from "graphql";
 import { rootValue, schema } from "./resolver";
 
+// example: {"query":"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }","variables":{"a":5,"b":2}}
+
 console.log('Inter-process communication started');
 process.stdin.setEncoding('utf-8');
 
