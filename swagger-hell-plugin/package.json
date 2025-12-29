@@ -1,15 +1,16 @@
 {
     "name": "swagger-hell-plugin",
     "scripts": {
-        "build": "yarn clean && yarn build:dist && yarn build:bin",
+        "build": "yarn clean:bin && yarn build:dist && yarn build:bin && yarn build:target",
         "build:dist": "tsc",
-        "build:bin": "pkg ./dist/resolver/inter-process-communcation.js --out-path ./bin",
+        "build:bin": "pkg ./dist/src/resolver/inter-process-communication.js --out-path ./bin",
+        "build:target": "tsx ./scripts/target-bin.ts",
         "dev": "tsx src/main.ts",
-        "dev:dist": "node ./dist/resolver/inter-process-communcation.js",
+        "dev:dist": "node ./dist/src/resolver/inter-process-communication.js",
         "test": "tsx src/test.ts",
         "test:ipc": "echo '{\"query\":\"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }\",\"variables\":{\"a\":5,\"b\":2}}' | tsx src/resolver/inter-process-communcation.ts",
         "type:check": "tsc --noEmit",
-        "clean": "rm -rf ./dist ./bin"
+        "clean:bin": "rm -rf ./dist ./bin"
     },
     "dependencies": {
         "graphql": "^16.12.0",
