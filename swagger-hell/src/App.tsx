@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,32 @@ function App() {
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     setGreetMsg(await invoke("greet", { name }));
+  }
+
+  const handleStart = async () => {
+    try {
+      await invoke('start_node');
+
+      listen("node:stdout", (event) => {
+        console.log("Node stdout:", event.payload);
+      });
+
+      listen("node:stderr", (event) => {
+        console.error("Node stderr:", event.payload);
+      });
+    } catch (e) {
+      console.log('handleStartError: ', e);
+    }
+  }
+
+  const handleSend = async () => {
+    try {
+
+      const res = await invoke('send_to_node', { message: JSON.stringify({"query":"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }","variables":{"a":5,"b":2}}) })
+      console.log('result', res);
+    } catch (e) {
+      console.log('handleSendError: ', e);
+    }
   }
 
   return (
@@ -41,6 +68,8 @@ function App() {
           onChange={(e) => setName(e.currentTarget.value)}
           placeholder="Enter a name..."
         />
+        <button onClick={handleStart}>start</button>
+        <button onClick={handleSend}>send</button>
         <button type="submit">Greet</button>
       </form>
       <p>{greetMsg}</p>
