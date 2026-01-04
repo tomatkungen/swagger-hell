@@ -37,6 +37,8 @@ export const rootValue = {
   OpenAPI3: OpenAPI3,
   hello: () => 'Hello, world!',
   add: ({ a, b }: { a: number, b: number }) => a + b,
+  // Replace this with package json semver
+  version: () => "0.0.0",
   // Swagger
   getSwaggerByUrl: async (url: string) => await getSwaggerByUrl(url),
   getSwaggerNames: async () => await getSwaggerNames(),
