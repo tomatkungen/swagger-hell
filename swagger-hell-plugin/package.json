@@ -1,5 +1,6 @@
 {
     "name": "swagger-hell-plugin",
+    "license": "MIT",
     "scripts": {
         "build": "yarn clean:bin && yarn build:dist && yarn build:bin && yarn build:target",
         "build:dist": "tsc",

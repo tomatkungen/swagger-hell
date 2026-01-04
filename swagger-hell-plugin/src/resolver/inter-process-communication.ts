@@ -1,4 +1,4 @@
-import { graphql } from "graphql";
+import { graphql /*, validateSchema */ } from "graphql";
 import { rootValue, schema } from "./resolver";
 
 // example: {"query":"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }","variables":{"a":5,"b":2}}
@@ -6,6 +6,7 @@ import { rootValue, schema } from "./resolver";
 console.log('Inter-process communication started');
 process.stdin.setEncoding('utf-8');
 
+// Receive stdin
 process.stdin.on('data', async (data) => {
 
     const input = data.toString().trim();
@@ -18,6 +19,12 @@ process.stdin.on('data', async (data) => {
     try {
         const { query, variables } = JSON.parse(input);
         
+        // const validateSchemaErrors = validateSchema(schema);
+
+        // if (validateSchemaErrors.length > 0) {
+        //     console.log('errors', validateSchemaErrors)
+        // }
+
         const res = await graphql({
             schema,
             source: query,
@@ -33,11 +40,13 @@ process.stdin.on('data', async (data) => {
     }
 });
 
+// std stream end
 process.stdin.on('end', () => {
     console.log('End of input. Exiting...');
     process.exit();
 });
 
+// std stream terminated
 process.on('SIGINT', () => {
     console.log('Process interrupted. Exiting...');
     process.exit();
