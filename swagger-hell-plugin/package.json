@@ -2,16 +2,17 @@
     "name": "swagger-hell-plugin",
     "license": "MIT",
     "scripts": {
-        "build": "yarn clean:bin && yarn build:dist && yarn build:bin && yarn build:target",
+        "build": "yarn build:clean && yarn build:bundle && yarn build:bin && yarn build:target",
+        "build:bundle": "esbuild ./src/resolver/inter-process-communication.ts --bundle --platform=node --outdir=./dist",
+        "build:bin": "pkg ./dist/inter-process-communication.js --out-path ./bin",
         "build:dist": "tsc",
-        "build:bin": "pkg ./dist/src/resolver/inter-process-communication.js --out-path ./bin",
         "build:target": "tsx ./scripts/target-bin.ts",
         "dev": "tsx src/main.ts",
-        "dev:dist": "node ./dist/src/resolver/inter-process-communication.js",
+        "dev:dist": "node ./dist/inter-process-communication.js",
         "test": "tsx src/test.ts",
         "test:ipc": "echo '{\"query\":\"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }\",\"variables\":{\"a\":5,\"b\":2}}' | tsx ./src/resolver/inter-process-communication.ts",
         "type:check": "tsc --noEmit",
-        "clean:bin": "rm -rf ./dist ./bin"
+        "build:clean": "rm -rf ./dist ./bin"
     },
     "dependencies": {
         "graphql": "^16.12.0",
@@ -20,6 +21,7 @@
     "devDependencies": {
         "@types/node": "^25.0.3",
         "@yao-pkg/pkg": "^6.11.0",
+        "esbuild": "^0.27.2",
         "tsx": "^4.21.0",
         "typescript": "^5.9.3"
     },

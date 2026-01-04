@@ -24,7 +24,7 @@ fn start_node(app: tauri::AppHandle) -> Result<(), String> {
 
     println!("CWD1: {:?}", currentfilepath);
 
-    let mut child = Command::new(currentdir)
+    let mut child = Command::new(currentfilepath)
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
