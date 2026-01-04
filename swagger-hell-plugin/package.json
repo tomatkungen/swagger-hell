@@ -8,7 +8,7 @@
         "dev": "tsx src/main.ts",
         "dev:dist": "node ./dist/src/resolver/inter-process-communication.js",
         "test": "tsx src/test.ts",
-        "test:ipc": "echo '{\"query\":\"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }\",\"variables\":{\"a\":5,\"b\":2}}' | tsx src/resolver/inter-process-communcation.ts",
+        "test:ipc": "echo '{\"query\":\"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }\",\"variables\":{\"a\":5,\"b\":2}}' | tsx ./src/resolver/inter-process-communication.ts",
         "type:check": "tsc --noEmit",
         "clean:bin": "rm -rf ./dist ./bin"
     },
