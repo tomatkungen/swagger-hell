@@ -15,7 +15,7 @@ export const OpenAPI3 = new GraphQLScalarType({
 const parseAST = (ast: ValueNode /*, variables*/) => {
     switch (ast.kind) {
         case Kind.STRING:
-        case Kind.BOOLEAN: 
+        case Kind.BOOLEAN:
             return ast.value;
         case Kind.FLOAT:
             return Number(ast.value)
