@@ -32,7 +32,11 @@ function App() {
   const handleSend = async () => {
     try {
 
-      const res = await invoke('send_to_node', { message: JSON.stringify({"query":"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }","variables":{"a":5,"b":2}}) })
+      const res = await invoke('send_to_node', { message: JSON.stringify({
+        query:"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }",
+        variables:{"a":5,"b":2},
+        event: 'test'
+      }) })
       console.log('result', res);
     } catch (e) {
       console.log('handleSendError: ', e);

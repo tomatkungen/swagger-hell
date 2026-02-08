@@ -4,7 +4,11 @@ use std::sync::{Arc, Mutex};
 use tauri::{Manager};
 use tauri::Emitter;
 use std::env;
+use std::process::Child;
 
+struct NodeProcess {
+    child: Mutex<Option<Child>>,
+}
 
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
@@ -16,6 +20,12 @@ fn greet(name: &str) -> String {
 fn start_node(app: tauri::AppHandle) -> Result<(), String> {
     // Command::new("node")
     // .arg("node_server.js") // path to your node script
+
+    let state = app.state::<NodeProcess>();
+    let mut guard = state.child.lock().unwrap();
+    if guard.is_some() {
+        return Err("Node process is already running".into());
+    }
 
     let currentfilepath = env::current_dir()
         .unwrap()
@@ -35,7 +45,9 @@ fn start_node(app: tauri::AppHandle) -> Result<(), String> {
     let stderr = child.stderr.take().unwrap();
     let stdin = Arc::new(Mutex::new(child.stdin.take().unwrap()));
 
-    // Read stdout
+    *guard = Some(child);
+
+    // Read stdout 
     let app_stdout = app.clone();
     std::thread::spawn(move || {
         let reader = BufReader::new(stdout);
@@ -75,6 +87,9 @@ fn send_to_node(
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .manage(NodeProcess {
+            child: Mutex::new(None),
+        })
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![greet, start_node, send_to_node])
         .run(tauri::generate_context!())

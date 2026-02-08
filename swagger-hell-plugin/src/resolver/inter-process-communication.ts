@@ -15,10 +15,10 @@ process.stdin.on('data', async (data) => {
         process.exit();
 
     console.log('> ', input);
-    
+
     try {
-        const { query, variables } = JSON.parse(input);
-        
+        const { query, variables, event } = JSON.parse(input);
+
         // const validateSchemaErrors = validateSchema(schema);
 
         // if (validateSchemaErrors.length > 0) {
@@ -32,8 +32,14 @@ process.stdin.on('data', async (data) => {
             variableValues: variables
         });
 
-        console.log('< ', JSON.stringify(res));
-        process.stdout.write(`${JSON.stringify(res)}\n`);
+        console.log('< ', JSON.stringify({
+            event: !event ? 'unknown' : event,
+            ...res
+        }));
+        process.stdout.write(`${JSON.stringify({
+            event: !event ? 'unknown' : event,
+            ...res
+        })}\n`);
     } catch (error) {
         const errorMessage = { message: (error as Error).message };
         process.stderr.write(`${JSON.stringify(errorMessage)}\n`);
