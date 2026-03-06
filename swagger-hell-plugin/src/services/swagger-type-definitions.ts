@@ -6,7 +6,7 @@ type SwaggerFile = Nullable<string>;
 
 export type SwaggerDefinition = {
     swaggerRaw: SwaggerFile;
-    SwaggerDefinitionType: SwaggerDefinitionType;
+    swaggerDefinitionType: SwaggerDefinitionType;
 }
 
 // Get Swagger Type Definitions by filename

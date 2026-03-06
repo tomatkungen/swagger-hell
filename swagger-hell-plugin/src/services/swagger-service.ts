@@ -1,7 +1,7 @@
 import { type OpenAPI3 } from "openapi-typescript";
 import { endpointsSwagger, fetchSwagger, filenamesSwagger, filenameSwagger, infoSwagger, urlSwagger } from "../handler/swagger-handler";
 
-export type Nullable<T> = T| null
+export type Nullable<T> = T | null
 
 export type SwaggerFileNames = {
     current: string[];
@@ -15,11 +15,11 @@ export type SwaggerInfo = {
 }
 
 // Fetch Swagger JSON from URL
-export const addSwaggerUrl = async (url: string): Promise<OpenAPI3 | null> =>
+export const addSwaggerUrl = async (url: string): Promise<Nullable<OpenAPI3>> =>
     (await fetchSwagger(url))
 
 // Get Swagger JSON by URL
-export const getSwaggerByUrl = async (url: string): Promise<OpenAPI3 | null> =>
+export const getSwaggerByUrl = async (url: string): Promise<Nullable<OpenAPI3>> =>
     (await urlSwagger(url))
 
 // Get Swagger filenames and previous filenames
@@ -27,7 +27,7 @@ export const getSwaggerNames = async (): Promise<SwaggerFileNames> =>
     (await filenamesSwagger())
 
 // Get Swagger JSON by filename
-export const getSwaggerByName = async (filename: string): Promise<OpenAPI3 | null> =>
+export const getSwaggerByName = async (filename: string): Promise<Nullable<OpenAPI3>> =>
     (await filenameSwagger(filename))
 
 // Get Swagger endpoints by filename

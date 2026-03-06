@@ -17,5 +17,19 @@ import { rootValue, schema } from "./resolver/resolver";
         variableValues: null
     });
 
-    console.log(JSON.stringify(res));
+    console.log('query', JSON.stringify(res));
+
+    const mutaion = /* GraphQL */ `
+        mutation AddSwaggerUrl($url: String!) {
+            addSwaggerUrl(url: $url)
+        }
+    `
+    const resMut = await graphql({
+        schema,
+        source: mutaion,
+        rootValue,
+        variableValues: { url: 'https://petstore3.swagger.io/api/v3/openapi.json' }
+    });
+
+    console.log('mutation', JSON.stringify(resMut));
 })();

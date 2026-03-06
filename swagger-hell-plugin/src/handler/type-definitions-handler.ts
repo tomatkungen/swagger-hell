@@ -1,5 +1,4 @@
 import openapiTS, { astToString } from "openapi-typescript";
-import { Nullable } from "../services/swagger-service";
 import { getSwaggerComponentRefs } from "../util.ts/get-swagger-component-refs";
 import { getSwaggerPathRefs } from "../util.ts/get-swagger-path-refs";
 import { pruneSwaggerComponentRefs } from "../util.ts/prune-swagger-component-refs";
@@ -11,13 +10,13 @@ export const typeDefinitionsSwagger = async (filename: string): Promise<SwaggerD
     const swaggerFile = await filenameSwagger(filename);
 
     if (!swaggerFile)
-        return { swaggerRaw: null, SwaggerDefinitionType: null };
+        return { swaggerRaw: null, swaggerDefinitionType: null };
 
     const swaggerAst = await openapiTS(swaggerFile);
 
     return {
         swaggerRaw: JSON.stringify(swaggerFile, null, 2),
-        SwaggerDefinitionType: astToString(swaggerAst)
+        swaggerDefinitionType: astToString(swaggerAst)
     };
 }
 
@@ -25,7 +24,7 @@ export const typeDefinitionsSwaggerByEndpoints = async (filename: string, endpoi
     const swaggerFile = await filenameSwagger(filename);
 
     if (!swaggerFile)
-        return { swaggerRaw: null, SwaggerDefinitionType: null };
+        return { swaggerRaw: null, swaggerDefinitionType: null };
 
     // Prune the swagger file to only include specified endpoints
     swaggerFile.paths = swaggerFile.paths || {};
@@ -63,6 +62,6 @@ export const typeDefinitionsSwaggerByEndpoints = async (filename: string, endpoi
 
     return {
         swaggerRaw: JSON.stringify(swaggerFile, null, 2),
-        SwaggerDefinitionType: astToString(swaggerAst)
+        swaggerDefinitionType: astToString(swaggerAst)
     };
 }

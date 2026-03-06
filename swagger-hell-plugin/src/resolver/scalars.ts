@@ -1,5 +1,4 @@
 import { GraphQLScalarType, Kind, type ValueNode } from 'graphql';
-import { parse } from 'node:path';
 
 export const OpenAPI3 = new GraphQLScalarType({
     name: "OpenAPI3",

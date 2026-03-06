@@ -10,6 +10,7 @@
         "dev": "tsx src/main.ts",
         "dev:dist": "node ./dist/inter-process-communication.js",
         "test": "tsx src/test.ts",
+        "test:swagger": "tsx src/test.swagger.ts",
         "test:ipc": "echo '{\"query\":\"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }\",\"variables\":{\"a\":5,\"b\":2}}' | tsx ./src/resolver/inter-process-communication.ts",
         "type:check": "tsc --noEmit",
         "build:clean": "rm -rf ./dist ./bin"

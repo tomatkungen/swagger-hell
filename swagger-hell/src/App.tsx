@@ -3,10 +3,12 @@ import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import "./App.css";
+import { useMutation } from "./hooks/useMutation";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
+  const { addSwagger } = useMutation()
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -31,12 +33,13 @@ function App() {
 
   const handleSend = async () => {
     try {
+      const res = await addSwagger('https://petstore3.swagger.io/api/v3/openapi.json');
 
-      const res = await invoke('send_to_node', { message: JSON.stringify({
-        query:"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }",
-        variables:{"a":5,"b":2},
-        event: 'test'
-      }) })
+      // const res = await invoke('send_to_node', { message: JSON.stringify({
+      //   query:"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }",
+      //   variables:{"a":5,"b":2},
+      //   event: 'test'
+      // }) })
       console.log('result', res);
     } catch (e) {
       console.log('handleSendError: ', e);
