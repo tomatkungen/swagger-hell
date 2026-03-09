@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
+import { osDataFolder } from "../util.ts/os-data-folder";
 
 // Create folder if it does not exist
 export const isFolderNotExistCreate = (rootFolder: string): string => {
-    const folderPath = path.resolve(__dirname, '..', '..', rootFolder);
+    const folderPath = osDataFolder(rootFolder); // path.resolve(__dirname, '..', '..', rootFolder);
 
     // If folder does not exist, create it
     if (!fs.existsSync(folderPath)) {

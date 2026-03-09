@@ -46,14 +46,15 @@ export const rootValue = {
   add: ({ a, b }: { a: number, b: number })                             => a + b,
   // Replace this with package json semver
   version: ()                                                           => "0.0.0",
-  // Swagger
+  // Swagger Query
   getSwaggerByUrl: async ({ url }: { url: string })                     => await getSwaggerByUrl(url),
   getSwaggerNames: async ()                                             => await getSwaggerNames(),
   getSwaggerByName: async ({ filename }: { filename: string })          => await getSwaggerByName(filename),
   getSwaggerEndpointsByName: async ({ filename }: { filename: string }) => await getSwaggerEndpointsByName(filename),
   getSwaggerInfoByName: async ({ filename }: { filename: string })      => await getSwaggerInfoByName(filename),
+  // Swagger Mutation
   addSwaggerUrl: async ({ url }: { url: string })                       => await addSwaggerUrl(url),
-  // Swagger definition
+  // Swagger Query definition
   getSwaggerTypeDefinitions: async ({ filename }: { filename: string }) => await getSwaggerTypeDefinitions(filename),
   getSwaggerTypeDefinitionsByEndpoints: async ({ filename, endpoints }: { filename: string, endpoints: string[] }) => await getSwaggerTypeDefinitionsByEndpoints(filename, endpoints)
 };

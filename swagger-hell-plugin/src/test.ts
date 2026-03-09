@@ -23,5 +23,5 @@ import { getSwaggerTypeDefinitions } from "./services/swagger-type-definitions";
     // console.log(swaggers4);
 
     const _swaggers5 = await typeDefinitionsSwaggerByEndpoints("petstore3-swagger-io-api-v3-openapi", ["/pet", "/user"]);
-    // console.log(swaggers5);
+    console.log(_swaggers5);
 })()

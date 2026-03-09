@@ -17,7 +17,7 @@ export const useMutation = () => {
 }
 
 const mutaion = /* GraphQL */ `
-  mutation AddSwaggerUrl($url: String) {
+  mutation AddSwaggerUrl($url: String!) {
     addSwaggerUrl(url: $url)
   }
 `

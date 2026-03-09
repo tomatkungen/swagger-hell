@@ -5,10 +5,12 @@ import { getJSONFileNameFromUrl } from "../util.ts/get-json-filename-url";
 import { validateOpaJson } from "../util.ts/validate-opa-json";
 import { getFileJson, getFilesInFolder, isFileExist, isFolderNotExistCreate, renameFile, saveFile } from "./file-handler";
 
+export const SwaggerFolderName = "SwaggerHell"
+
 export const urlSwagger = async (url: string): Promise<OpenAPI3 | null> => {
 
     // Folder to store swaggers
-    const swaggerFolder = isFolderNotExistCreate('swaggers');
+    const swaggerFolder = isFolderNotExistCreate(SwaggerFolderName);
 
     // Generate filename from URL
     const filename = getJSONFileNameFromUrl(url);
@@ -28,7 +30,7 @@ export const fetchSwagger = async (url: string): Promise<OpenAPI3 | null> => {
     const filename = getJSONFileNameFromUrl(url);
 
     // Folder to store swaggers
-    const swaggerFolder = isFolderNotExistCreate('swaggers');
+    const swaggerFolder = isFolderNotExistCreate(SwaggerFolderName);
 
     // If file exists, rename it to filename_prev.json
     if (isFileExist(swaggerFolder, filename)) {
@@ -42,7 +44,7 @@ export const fetchSwagger = async (url: string): Promise<OpenAPI3 | null> => {
 }
 
 export const filenamesSwagger = async (): Promise<SwaggerFileNames> => {
-    const swaggerFolder = isFolderNotExistCreate('swaggers');
+    const swaggerFolder = isFolderNotExistCreate(SwaggerFolderName);
 
     const filenames = getFilesInFolder(swaggerFolder);
 
@@ -54,7 +56,7 @@ export const filenamesSwagger = async (): Promise<SwaggerFileNames> => {
 
 export const filenameSwagger = async (filename: string): Promise<OpenAPI3 | null> => {
     // Folder to store swaggers
-    const swaggerFolder = isFolderNotExistCreate('swaggers');
+    const swaggerFolder = isFolderNotExistCreate(SwaggerFolderName);
 
     // Ensure filename ends with .json
     if (!filename.endsWith('.json'))
