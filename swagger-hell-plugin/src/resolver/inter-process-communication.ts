@@ -3,6 +3,8 @@ import { rootValue, schema } from "./resolver";
 
 // example: {"query":"query ($a:Int!,$b:Int!){ add(a:$a,b:$b) }","variables":{"a":5,"b":2}}
 
+const DEV = process.env.DEV;
+
 console.log('Inter-process communication started');
 process.stdin.setEncoding('utf-8');
 
@@ -14,7 +16,7 @@ process.stdin.on('data', async (data) => {
     if (input === 'exit')
         process.exit();
 
-    console.log('> ', input);
+    DEV === "dev" && console.log('> ', input);
 
     try {
         const { query, variables, event } = JSON.parse(input);
@@ -32,7 +34,7 @@ process.stdin.on('data', async (data) => {
             variableValues: variables
         });
 
-        console.log('< ', JSON.stringify({
+        DEV === "dev" && console.log('< ', JSON.stringify({
             event: !event ? 'unknown' : event,
             ...res
         }));

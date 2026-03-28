@@ -6,7 +6,7 @@ export const useMutation = () => {
             message: JSON.stringify({
                 query: mutaion,
                 variables: { url },
-                event: 'addSwagger'
+                event: 'addSwaggerUrl'
             })
         })
     }
