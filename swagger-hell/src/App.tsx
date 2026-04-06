@@ -1,6 +1,7 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import "./App.css";
 import { SwaggerHell } from "./feature/SwaggerHell";
+import { useNodeStdout } from "./hooks/useNodeStdout";
 
 const darkTheme = createTheme({
     palette: {
@@ -8,7 +9,10 @@ const darkTheme = createTheme({
     },
 });
 
+
 export const App = () => {
+    useNodeStdout();
+
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />

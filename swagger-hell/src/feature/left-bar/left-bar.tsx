@@ -1,19 +1,21 @@
-import { Box } from "@mui/material"
-import { listen } from "@tauri-apps/api/event"
-import { useEffect, useState } from "react"
+import { Box } from "@mui/material";
+import { useEffect } from "react";
+import { useEvent } from "../../hooks/useEvent";
+import { useQuery } from "../../hooks/useQuery";
 
 export const LeftBar = () => {
-    const [_payload, setPayload] = useState<any>();
+    const { getSwaggerNames } = useQuery();
 
+    const data = useEvent('GetSwaggerNames')
+
+    // Init data
     useEffect(() => {
-        listen('node:stdout', (event) => {
-            console.log('yollo', event.payload);
-            setPayload(event.payload)
-        })
+        getSwaggerNames();
     }, [])
 
     return (
         <Box sx={{ border: '1px solid green', width: '50%', height: '100%' }}>
+            {data && JSON.stringify(data)}
         </Box>
     )
 }

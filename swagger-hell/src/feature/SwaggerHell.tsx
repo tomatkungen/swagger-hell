@@ -7,7 +7,7 @@ import { invoke } from "@tauri-apps/api/core";
 
 export const SwaggerHell = () => {
     const [_addSwaggerValue, setAddSwaggerValue] = useState<string>("")
-    const { addSwagger } = useMutation()
+    const { addSwagger } = useMutation();
 
     useEffect(() => {
         const enablePlugin = async () => {

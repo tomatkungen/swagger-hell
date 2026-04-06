@@ -1,18 +1,15 @@
 import { invoke } from "@tauri-apps/api/core";
 
-type SwaggerFileNames = {
-    current: string[];
-    previous: string[];
-}
-
 export const useQuery = () => {
-    const getSwaggerNames = async (): Promise<SwaggerFileNames> => {
-        return await invoke('send_to_node', {
+    const getSwaggerNames = async (): Promise<void> => {
+        const res = await invoke('send_to_node', {
             message: JSON.stringify({
-                query,
-                event: 'getSwaggerFileNames'
+                query: queryGetSwaggerNames,
+                event: 'getSwaggerNames'
             })
         })
+
+        console.log('res', res);
     }
 
     return {
@@ -20,7 +17,7 @@ export const useQuery = () => {
     }
 }
 
-const query = /* GraphQL */ `
+const queryGetSwaggerNames = /* GraphQL */ `
     query GetSwaggerNames {
         getSwaggerNames {
             current
