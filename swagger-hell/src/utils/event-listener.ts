@@ -5,6 +5,10 @@ export type EventName = {
             previous: string[];
         }
     };
+    'GetSwaggerEndpointsByName': {
+        getSwaggerEndpointsByName: string[]
+    };
+    'Empty': {}
 }
 
 export class EventListener {
@@ -26,11 +30,20 @@ export class EventListener {
     }
 
     public static notifyListener(eventName: keyof EventName, data: object) {
-        if (!this.listeners[eventName] || this.latestEventName === eventName)
+        if (!this.listeners[eventName] || this.latestEventName === eventName) {
+            console.log('prevent event', eventName)
             return;
-        console.log('notifyListener', eventName)
+        }
+        console.log('notifyListener', eventName, data)
+        EventListener.listListener();
+
+        // Prevent event trigger again while update listeners
         this.latestEventName = eventName;
+        
         (this.listeners[eventName] || []).forEach(fn => fn(data))
+        
+        // Reset event trigger
+        this.latestEventName = 'Empty';
     }
 
     public static removeListener(eventName: keyof EventName, cb: (obj: object) => void) {

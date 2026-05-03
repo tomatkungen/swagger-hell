@@ -1,20 +1,22 @@
 import { Box, Stack } from "@mui/material";
-import { useEffect, useState } from 'react';
-import { TopBar } from './top-bar/TobBar';
-import { LeftBar } from "./left-bar/left-bar";
-import { useMutation } from "../hooks/useMutation";
 import { invoke } from "@tauri-apps/api/core";
+import { useEffect, useState } from 'react';
+import { useMutation } from "../hooks/useMutation";
+import { LeftBar } from "./left-bar/left-bar";
+import { TopBar } from './top-bar/TobBar';
+
 
 export const SwaggerHell = () => {
     const [_addSwaggerValue, setAddSwaggerValue] = useState<string>("")
+    const [open, setOpen] = useState<boolean>(true);
     const { addSwagger } = useMutation();
 
     useEffect(() => {
-        const enablePlugin = async () => {
-            await invoke('start_node');
+        const enablePlugin = () => {
+            invoke('start_node');
         }
 
-        enablePlugin();
+        void enablePlugin();
     }, [])
 
     const handleAddSwaggerClick = async (value: string) => {
@@ -25,11 +27,13 @@ export const SwaggerHell = () => {
 
     return (
         <Box sx={{ height: '100%' }}>
-            <TopBar onAddSwaggerButtonClick={handleAddSwaggerClick} />
-            <Stack direction={'row'} sx={{ height: 'calc(100% - 88px)' }}>
-                <LeftBar/>
-                <Box sx={{ border: '1px solid blue', width: '50%', height: '100%' }}>Right</Box>
+            <TopBar onAddSwaggerButtonClick={handleAddSwaggerClick} onClickOpen={() => setOpen(true)}/>
+            <Stack direction={'row'} sx={{ width: '100%', border: '1px solid pink' }}>        
+                <LeftBar open={open} setOpen={setOpen}/>
+                <Box sx={{ width: '100%' }} onClick={() => setOpen(true)}>
+                    <Box sx={{ border: '1px solid blue', width: '100%', height: '100%' }}>Right</Box>
+                </Box>
             </Stack>
-        </Box>
+        </Box >
     )
 }

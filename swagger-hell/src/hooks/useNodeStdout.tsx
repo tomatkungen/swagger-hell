@@ -9,14 +9,10 @@ export const useNodeStdout = () => {
 
         const eventListener = async () => {
             unListenFn = await listen('node:stdout', (event) => {
-                console.log('event', event)
                 const res = JSON.parse(typeof event.payload === "string" ? event.payload : "");
                 
                 console.log('event.payload', res)
-                
-                if (res.event === "getSwaggerNames") {
-                    EventListener.notifyListener('GetSwaggerNames', res.data);
-                }
+                EventListener.notifyListener(res.event, res.data);
             })
         }
         EventListener.listListener();
